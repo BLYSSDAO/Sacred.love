@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://polygon-mainnet.g.alchemy.com" crossorigin>
+    <link rel="preconnect" href="https://ipfs.io" crossorigin>
+    <link rel="dns-prefetch" href="https://polygon-rpc.com" />
+    <link rel="dns-prefetch" href="https://rpc.ankr.com" />
+    <link rel="dns-prefetch" href="https://polygonscan.com" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet"></noscript>
+    <title>BLYSS DAO | Health Sovereignty & Decentralized Wealth</title>
+    
+    <style>
+      body { margin: 0; background: #000; }
+      #root:empty { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+      #root:empty::after { content: "Loading..."; color: #D4AF37; font-family: monospace; font-size: 1.25rem; animation: pulse 1.5s ease-in-out infinite; }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').catch(function() {});
+        });
+      }
+    </script>
+  </body>
+</html>

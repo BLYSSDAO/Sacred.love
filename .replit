@@ -1,0 +1,66 @@
+modules = ["nodejs-20", "web", "postgresql-16"]
+run = "npm run dev"
+hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+
+[nix]
+channel = "stable-25_05"
+packages = ["unzip", "tesseract", "poppler"]
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["npm", "run", "build"]
+run = ["node", "./dist/index.cjs"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3000
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
+[agent]
+mockupState = "FULLSTACK"
+integrations = [
+  "javascript_database:1.0.0",
+  "javascript_openai_ai_integrations:2.0.0",
+  "javascript_log_in_with_replit:2.0.0",
+  "javascript_object_storage:2.0.0",
+  "github:1.0.0",
+]
+expertMode = true
+
+[userenv]
+
+[userenv.shared]
+TREASURY_WALLET = "0xB2e78906f7A434d4Ed665307d80a4F8B234A8eF7"
+PROJECTS_WALLET = "0x02A9676e59647232B7F2966fD2a9a996Fffd33B0"
+STAKING_WALLET = "0xC96B6fFc49219B432c3989e021c8Db649C1f82BB"
+INDIGENOUS_WALLET = "0x13d6FF57d7A1Dc0A24d477a278609aF99E91eedc"
+POLYGON_RPC_URL = "https://polygon-mainnet.g.alchemy.com/v2/nwwGI6kDGI4_1tmpOXBsO"
+DEPLOYER_PRIVATE_KEY = "0xd3edc537857464e651d88742ff7aa90aca87e67be997f656b5dd3a9c34c8bda3"
+BACKEND_SIGNER_KEY = "0xd3edc537857464e651d88742ff7aa90aca87e67be997f656b5dd3a9c34c8bda3"
+BACKEND_SIGNER = "0xf8C4243553821cF43b4F8eb43E83b3A25E8228F0"
+CONTRACT_ADDRESS = "0x7Fd04542F46d501f0bF9400229E6dba43290F213"
+POLYGON_NETWORK = "mainnet"
+CHAIN_ID = "137"
+VITE_CONTRACT_ADDRESS = "0x7Fd04542F46d501f0bF9400229E6dba43290F213"
+RESEND_API_KEY = "re_bAxtNExQ_G3Pn7qgtPc2znU2etip4VZjx"
